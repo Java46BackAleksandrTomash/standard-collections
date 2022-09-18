@@ -2,28 +2,47 @@ package telran.collections.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.NoSuchElementException;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class StackIntTest {
+import telran.util.StackInt;
 
+class StackIntTest {
+	
+	StackInt list = new StackInt();
+	
+	
+	
 	@Test
 	void testPop() {
-		//TODO
+		assertThrows(NoSuchElementException.class, () -> list.pop());
+		list.push(1);
+		list.push(2);
+		assertEquals(2, list.pop());
 	}
 
 	@Test
 	void testPush() {
-		//TODO
-	}
+		assertTrue(list.isEmpty());
+		list.push(1);
+		assertFalse(list.isEmpty());
+	}	
 
 	@Test
 	void testIsEmpty() {
-		//TODO
+		assertTrue(list.isEmpty());
 	}
 
 	@Test
 	void testGetMaxNumber() {
-		//TODO
+		assertThrows(NoSuchElementException.class, () -> list.getMaxNumber());
+		list.push(1);
+		list.push(2);
+		list.push(3);
+		list.push(4);
+		assertEquals(4, list.getMaxNumber());
 	}
 
 }

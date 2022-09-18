@@ -1,27 +1,41 @@
 package telran.util;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+
 public class StackInt {
-	//TODO fields
-	//complexity of all following methods is O[1]
-public int pop() {
-	//TODO
-	//removes last number and returns removed number
-	//throws exception NoSuchElementException for empty stack
-	return 0;
-}
-public void push(int number) {
-	//TODO
-	//adds number at end of a stack
-}
-public boolean isEmpty() {
-	//TODO
-	//returns true if a stack is empty
-	return false;
-}
-public int getMaxNumber() {
-	//TODO
-	//returns maximal number existing in a stack
-	//throws exception NoSuchElementException for empty stack
-	return 0;
-}
+
+	List<Integer> list = new ArrayList<>();
+
+	public int pop() {
+		if (list.isEmpty()) {
+			throw new NoSuchElementException();
+		}
+		return list.remove((list.size() - 1));
+	}
+
+	public void push(int number) {
+
+		if (list.isEmpty() || number >= list.size() - 1) {
+			list.add(number);
+		}
+	}
+
+	public boolean isEmpty() {
+
+		return list.isEmpty();
+	}
+
+	public int getMaxNumber() {
+		if (list.isEmpty()) {
+			throw new NoSuchElementException();
+		}
+		Collections.sort(list);
+
+		return (list.get(list.size() - 1));
+	}
 }
