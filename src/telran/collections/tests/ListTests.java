@@ -73,9 +73,11 @@ class ListTests {
 		assertArrayEquals(numbers, listMutable.toArray(Integer[]::new));
 	}
 	private void removeRepeated(List<Integer> list) {
-		// TODO Auto-generated method stub
+		
 		//most optimal way for removing the repeated elements
 		//O[N]
+		final HashSet<Integer> setHelper = new HashSet<>();
+		list.removeIf(n -> !setHelper.add(n));
 		
 	}
 
