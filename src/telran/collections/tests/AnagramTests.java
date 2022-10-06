@@ -6,22 +6,26 @@ import org.junit.jupiter.api.Test;
 import static telran.util.Anagram.*;
 class AnagramTests {
 
-	String word = "Hello";
+	String word = "yellow";
 	@Test
-	void anagramTest() {
+	void testAnagramTrue() {
+		assertTrue(isAnagram(word, "loweyl"));
+		assertTrue(isAnagram(word, "elolyw"));
+		assertTrue(isAnagram(word, "wolley"));
+		assertTrue(isAnagram(word, "loleyw"));
 		
-		assertTrue(isAnagram(word, "hello"));
-		assertTrue(isAnagram(word, "helol"));
-		assertTrue(isAnagram(word, "ellho"));
-		assertTrue(isAnagram(word, "lelho"));
-		assertTrue(isAnagram(word, "olleh"));
-		
-		assertFalse(isAnagram(word, "hella"));
-		assertFalse(isAnagram(word, "helly"));
-		assertFalse(isAnagram(word, "heloo"));
-		assertFalse(isAnagram(word, "oleho"));
-		assertFalse(isAnagram(word, "helll"));
 	}
+	@Test
+	void testAnagramFalse() {
+		assertFalse(isAnagram(word,""));
+		assertFalse(isAnagram(word, "yellob"));
+		assertFalse(isAnagram(word,"yello"));
+		assertFalse(isAnagram(word,"yelllo"));
+		
+
+
+		
 	}
 
 
+}

@@ -1,36 +1,37 @@
 package telran.util;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class Anagram {
 
-	public static boolean isAnagram(String word, String anagram) {
-		if (word.length() != anagram.length()) {
-			throw new IllegalArgumentException();
-		}
-		char[] wordArr = word.trim().toLowerCase().toCharArray();
-		char[] anagramArr = anagram.trim().toLowerCase().toCharArray();
-
-		Map<Character, Integer> map = new HashMap<>();
-		for (char c : wordArr) {
-			map.put(c, map.getOrDefault(c, 0) + 1);
-		}
-		for (char c : anagramArr) {
-			int count = map.getOrDefault(c, 0);
-			if (count != 0) {
-				map.put(c, count - 1);
-			} else
-				return false;
-
-		}
-
-		return true;
-	}
+//	public static boolean isAnagram(String word, String anagram) {
+//		if (word.length() != anagram.length()) {
+//			throw new IllegalArgumentException();
+//	}
+//		char[] wordArr = word.trim().toLowerCase().toCharArray();
+//		char[] anagramArr = anagram.trim().toLowerCase().toCharArray();
+//
+//		Map<Character, Integer> map = new HashMap<>();
+//
+//		for (char c : wordArr) {
+//			map.put(c, map.getOrDefault(c, 0) + 1);
+//		}
+//		for (char c : anagramArr) {
+//			int count = map.getOrDefault(c, 0);
+//			if (count != 0) {
+//				map.put(c, count - 1);
+//			} else
+//				return false;
+//
+//		}
+//
+//		return true;
+//	}
+//}
 	///////////////////// another solution///////////////////
-	
-//	public static boolean isAnagram1(String word, String anagram) {
+
+//	public static boolean isAnagram(String word, String anagram) {
 //		boolean res = false;
 //		if(word.length() == anagram.length()) {
 //			HashMap<Character, Integer> mapLetters = getMapLetters(word);
@@ -57,5 +58,36 @@ public class Anagram {
 //	}
 //	return res;
 //}
+//}
+	
+	
+
+	
+	
+
+/////////////////////solution with methods marge and compute///////////////////
+
+public static boolean isAnagram(String word, String anagram) {
+	
+	if(word.length() != anagram.length()) {
+		return false;
+	}
+	HashMap<Character, Integer> charCountsMap = getCharCounts(word);
+	for(char c: anagram.toCharArray()) {
+
+		if (charCountsMap.compute(c, (k, v) -> v == null ? -1 : v - 1 ) < 0 )
+			return false;
+	}
+	return true;
 }
 
+private static HashMap<Character, Integer> getCharCounts(String word) {
+	HashMap<Character, Integer> res = new HashMap<>();
+	for(char c: word.toCharArray()) {
+		res.merge(c, 1, (a, b) -> a + b);
+	}
+	return res;
+}
+
+
+}
